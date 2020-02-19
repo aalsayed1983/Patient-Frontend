@@ -1,0 +1,113 @@
+<div id="patient" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/pages/patients'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div fxLayout="column" fxLayoutAlign="start start"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="h2" *ngIf="pageType ==='edit'">
+                        {{patient.forenames}}
+                    </div>
+                    <div class="h2" *ngIf="pageType ==='new'">
+                        New Patient
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>Patient Details</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <div>
+                <button mat-raised-button class="save-product-button" [disabled]="patientForm.invalid"
+                    *ngIf="pageType ==='new'" (click)="addPatient()">
+                    <span>ADD</span>
+                </button>
+
+                <button mat-raised-button class="save-product-button"
+                    [disabled]="patientForm.invalid || patientForm.pristine" *ngIf="pageType ==='edit'"
+                    (click)="editPatient()">
+                    <span>SAVE</span>
+                </button> 
+                &nbsp; &nbsp; &nbsp;
+                <button mat-raised-button class="save-product-button" *ngIf="pageType ==='edit'"
+                    (click)="deletePatient()">
+                    <span>DELETE</span>
+                </button>
+            </div>
+
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+           
+            <!-- CONTENT -->
+            <div class="content">
+                <form name="patientForm" [formGroup]="patientForm" class="product w-100-p" fxLayout="column"
+                    fxFlex>
+                    <mat-tab-group>
+                        <mat-tab label="Basic Info">
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                
+                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                    <mat-label>Pas Number</mat-label>
+                                    <input matInput placeholder="Pas Number" name="pasNumber" formControlName="pasNumber"
+                                        required>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                    <mat-label>Fore Names</mat-label>
+                                    <input matInput placeholder="Fore Names" name="forenames" formControlName="forenames"
+                                        required>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                    <mat-label>Surname</mat-label>
+                                    <input matInput placeholder="Surname" name="surname" formControlName="surname"
+                                        required>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                    <mat-label>Date Of Birth</mat-label>
+                                    <input matInput [matDatepicker]="dueDatePicker" placeholder="Date Of Birth" formControlName="dateOfBirth">
+                                    <mat-datepicker-toggle matSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #dueDatePicker></mat-datepicker>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                    <mat-label>Sex Code</mat-label>
+                                    <input matInput placeholder="Sex Code" name="sexCode" formControlName="sexCode"
+                                        required>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                    <mat-label>Home Telephone Number</mat-label>
+                                    <input matInput placeholder="Home Telephone Number" name="homeTelephoneNumber" formControlName="homeTelephoneNumber"
+                                        required>
+                                </mat-form-field>
+                            
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>        
+            </div>
+            <!-- / CONTENT -->
+        
+        </div>
+         <!-- / CONTENT CARD -->
+    </div>
+     <!-- / CENTER -->
+</div>
+
